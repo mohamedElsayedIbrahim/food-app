@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,10 +18,17 @@ class CustomerSeeder extends Seeder
         //
         for ($i=0; $i < 5; $i++) { 
             # code...
-            User::create([
+            $user = User::create([
                 'name'=>fake()->name(),
                 'email'=>"customer$i@mail.com",
                 'password'=>Hash::make('123456789')
+            ]);
+            
+            Customer::create([
+                'user_id'=>$user->id,
+                'customer_address'=>fake()->address(),
+                'customer_phone'=>fake()->phoneNumber(),
+                'customer_prefrences'=>'healthy Food'
             ]);
         }
     }
