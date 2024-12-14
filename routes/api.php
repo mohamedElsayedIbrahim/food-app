@@ -15,3 +15,4 @@ Route::middleware('auth.api')->group(function(){
 
 Route::resource('products',ProductController::class);
 Route::post('login',[UserController::class,'login']);
+Route::post('signup',[UserController::class,'signup']);
