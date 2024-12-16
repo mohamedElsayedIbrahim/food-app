@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Order extends Model
 {
     //
-    protected $fillable = ['user_id','payment_status','order_date'];
+    protected $fillable = ['customer_id','payment_status','order_date'];
 
     function products() : BelongsToMany {
         return $this->belongsToMany(Product::class)->withPivot('quantity');

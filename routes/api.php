@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function(){
     Route::resource('orders',OrderController::class);
+    Route::post('logout',[UserController::class,'logout']);
 });
 
 Route::resource('products',ProductController::class);

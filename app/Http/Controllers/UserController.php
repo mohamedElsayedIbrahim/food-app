@@ -70,6 +70,20 @@ class UserController extends Controller
                 'customer_phone'=>$request->phone,
                 'customer_prefrences'=>$request->customer_prefrences
             ]);
+            return $this->sendsuccess(['message'=>'User has been registered'],'success');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->sendError(['message'=>$th->getMessage()],'error');
+        }
+    }
+
+    function logout(Request $request) : object {
+        try {
+            //code...
+            $token = $request->user()->token();
+            $token->revoke();
+            return $this->sendsuccess(['message'=>'logged out successfully'],'success');
         } catch (\Throwable $th) {
             //throw $th;
             return $this->sendError(['message'=>$th->getMessage()],'error');
