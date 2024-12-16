@@ -68,7 +68,7 @@ class UserController extends Controller
                 'user_id'=>$user->id,
                 'customer_address'=>$request->address,
                 'customer_phone'=>$request->phone,
-                'customer_prefrences'=>'healthy Food'
+                'customer_prefrences'=>$request->customer_prefrences
             ]);
         } catch (\Throwable $th) {
             //throw $th;

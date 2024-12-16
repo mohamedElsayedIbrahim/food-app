@@ -17,9 +17,10 @@ class ProductResource extends JsonResource
         // return parent::toArray($request);
 
         return[
+            'product_code'=>$this->id,
             'product_name'=>$this->recipe_name,
             'product_ingredients'=>$this->ingredients,
-            'product_nutrition_info'=>$this->product_nutritional_info,
+            'product_nutrition_info'=>$this->nutritional_info,
             'created_at'=>$this->created_at->format('d/m/Y')
         ];
     }
