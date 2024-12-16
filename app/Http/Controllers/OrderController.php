@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -26,9 +27,21 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):object
     {
-        //
+        $validation = Validator::make($request->all(),[
+            'products'=>'required',
+            'products:*'=>'exists:prdoucts,id',
+            'quentity'=>'require',
+            'quentity:*'=>'integer'
+        ]);
+
+        if ($validation->fails()) {
+            # code...
+            return $this->sendError($validation->errors(),'error');
+        }
+
+        
     }
 
     /**

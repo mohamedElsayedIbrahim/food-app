@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -9,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:api');
 
-Route::middleware('auth.api')->group(function(){
-
+Route::middleware('auth:api')->group(function(){
+    Route::resource('orders',OrderController::class);
 });
 
 Route::resource('products',ProductController::class);
