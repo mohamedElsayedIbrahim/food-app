@@ -81,7 +81,7 @@ class UserController extends Controller
     function logout(Request $request) : object {
         try {
             //code...
-            $token = $request->user()->token();
+            $token = Auth::guard('api')->user()->token();
             $token->revoke();
             return $this->sendsuccess(['message'=>'logged out successfully'],'success');
         } catch (\Throwable $th) {

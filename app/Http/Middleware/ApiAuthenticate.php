@@ -16,16 +16,12 @@ class ApiAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('api')->check()) {
-            return $next($request);
+        if (!Auth::guard('api')->check()) {
+            // Modify this to redirect to a different route if necessary
+            return response()->json(['message' => 'Please login'], 401);
         }
 
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
-        // Modify this to redirect to a different route if necessary
-        return response()->json(['message' => 'Please login'], 401);
+        return $next($request);
         
     }
 }
