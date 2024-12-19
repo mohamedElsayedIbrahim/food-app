@@ -26,6 +26,6 @@ class ApiAuthenticate
 
         // Modify this to redirect to a different route if necessary
         return response()->json(['message' => 'Please login'], 401);
-
+        
     }
 }
