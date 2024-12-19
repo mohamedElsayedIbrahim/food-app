@@ -3,6 +3,7 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ApiAuthenticate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // })->middleware('auth:api');
 
-Route::middleware('auth:api')->group(function(){
+Route::middleware(ApiAuthenticate::class)->group(function(){
     Route::resource('orders',OrderController::class);
     Route::post('logout',[UserController::class,'logout']);
 });
