@@ -12,6 +12,6 @@ class Product extends Model
     protected $fillable = ['recipe_name','ingredients','nutritional_info','price'];
 
     function orders() : BelongsToMany {
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
+        return $this->belongsToMany(Order::class)->withPivot('quantity')->withTimestamps();
     }
 }

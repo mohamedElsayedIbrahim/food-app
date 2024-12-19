@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = ['customer_id','payment_status','order_date'];
 
     function products() : BelongsToMany {
-        return $this->belongsToMany(Product::class)->withPivot('quantity');
+        return $this->belongsToMany(Product::class)->withPivot('quantity')->withTimestamps();
     }
 
     function customer() : BelongsTo {

@@ -12,8 +12,8 @@ class Customer extends Model
     //
     protected $fillable = ['user_id','customer_address','customer_phone','customer_prefrences'];
 
-    function user() : HasOne {
-        return $this->hasOne(User::class);
+    function user() : BelongsTo {
+        return $this->belongsTo(User::class);
     }
 
     function orders() : HasMany {

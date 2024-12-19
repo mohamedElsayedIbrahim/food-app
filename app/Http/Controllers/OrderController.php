@@ -46,20 +46,25 @@ class OrderController extends Controller
 
         $user = $request->user();
         
-        dd($user->customer);
+        if ($user->customer === null) {
+            # code...
+            return $this->sendError(['message'=>'Can not accept order for non customer user'],'error');
+        }
+        
+
         $order = Order::create([
             'customer_id'=>$user->customer->id,
             'payment_status'=>0,
             'order_date'=>Carbon::now()
             ]);
 
-            $data = [];
-
             for ($i=0; $i < count($request->products); $i++) { 
-                array_push($data,[$request->products[$i]=>['quantity'=>$request->quentity[$i]]]);
+                $recored = [$request->products[$i]=>['quantity'=>$request->quentity[$i]]];
+                $order->products()->sync($recored);
             }
-            dd($data);
-            $order->products()->sync($data);
+
+            return $this->sendsuccess(['message'=>'order is created succefully!'],'success');
+
         try {
             //code...
         } catch (\Throwable $th) {

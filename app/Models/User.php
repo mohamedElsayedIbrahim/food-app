@@ -27,8 +27,8 @@ class User extends Authenticatable
         'password',
     ];
 
-    function customer() : BelongsTo {
-        return $this->belongsTo(Customer::class);
+    function customer() : HasOne {
+        return $this->hasOne(Customer::class);
     }
 
     /**
