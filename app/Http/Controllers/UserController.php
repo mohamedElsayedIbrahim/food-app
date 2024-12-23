@@ -27,11 +27,11 @@ class UserController extends Controller
         try {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 // The user is being remembered...
-                $user = [
-                    'name'=>Auth::user()->name,
-                    'email'=>Auth::user()->email,
-                    'token'=>Auth::user()->createToken('FOODAPPIGSR')->accessToken
-                ];
+                // $user = [
+                //     'first_name'=>Auth::user()->name,
+                //     'email'=>Auth::user()->email,
+                //     'token'=>Auth::user()->createToken('FOODAPPIGSR')->accessToken
+                // ];
     
                 return $this->sendsuccess($user);
             }
@@ -45,7 +45,8 @@ class UserController extends Controller
 
     function signup(Request $request) : object {
         $validation = Validator::make($request->all(),[
-            'name'=>'required',
+            'first_name'=>'required',
+            'last_name'=>'required',
             'email'=>'required|unique:users,email',
             'password'=>'required',
             'address'=>'required',
@@ -59,7 +60,9 @@ class UserController extends Controller
 
         try {
             $user = User::create([
-                'name'=>$request->name,
+                'last_name'=>$request->last_name,
+                'first_name'=>$request->first_name,
+                'role'=>'customer',
                 'email'=>$request->email,
                 'password'=>Hash::make($request->password)
             ]);
