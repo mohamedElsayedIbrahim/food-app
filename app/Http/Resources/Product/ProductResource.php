@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'product_name'=>$this->recipe_name,
             'product_ingredients'=>$this->ingredients,
             'product_nutrition_info'=>$this->nutritional_info,
+            'price'=>(float)$this->price,
             'created_at'=>$this->created_at->format('d/m/Y')
         ];
     }
