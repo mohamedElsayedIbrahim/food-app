@@ -128,7 +128,8 @@ class ProductSeeder extends Seeder
                 'recipe_name'=>$value['recipe_name'],
                 'ingredients'=>$value['ingredients'],
                 'nutritional_info'=>$value['nutritional_info'],
-                'price'=>$value['price']
+                'price'=>$value['price'],
+                'category_id'=>random_int(1,11)
             ]);
         }
     }

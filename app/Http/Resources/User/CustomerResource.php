@@ -21,7 +21,7 @@ class CustomerResource extends JsonResource
             'email'=>$this->email,
             'role'=>$this->role,
             'customer_address'=>$this->customer->customer_address,
-            'customer_phone'=>$this->customer->phone,
+            'customer_phone'=>$this->customer->customer_phone,
             'customer_prefrences'=>$this->customer->customer_prefrences,
             'token'=>$this->createToken('FOODAPPIGSR')->accessToken
         ];

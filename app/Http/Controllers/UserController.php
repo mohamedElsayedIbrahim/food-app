@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User\CustomerResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,8 +34,14 @@ class UserController extends Controller
                 //     'email'=>Auth::user()->email,
                 //     'token'=>Auth::user()->createToken('FOODAPPIGSR')->accessToken
                 // ];
+
+                if (Auth::user()->role === 'admin') {
+                    # code...
+                    return $this->sendsuccess(new UserResource(Auth::user()));
+                }
     
-                return $this->sendsuccess($user);
+                return $this->sendsuccess(new CustomerResource(Auth::user()));
+
             }
     
             return $this->sendError(['message'=>'can\'t find user']);

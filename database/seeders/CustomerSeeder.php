@@ -16,8 +16,8 @@ class CustomerSeeder extends Seeder
     {
         //
         $user = User::updateOrCreate([
-            'first_name'=>fake()->name(),
-            'last_name'=>fake()->name(),
+            'first_name'=>fake()->lastName(),
+            'last_name'=>fake()->firstName(),
             'email'=>"customer@mail.com",
             'role'=>'customer',
             'password'=>Hash::make('123456789')
