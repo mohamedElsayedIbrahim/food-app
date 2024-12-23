@@ -19,6 +19,7 @@ class CustomerSeeder extends Seeder
             'first_name'=>fake()->name(),
             'last_name'=>fake()->name(),
             'email'=>"customer@mail.com",
+            'role'=>'customer',
             'password'=>Hash::make('123456789')
         ]);
         

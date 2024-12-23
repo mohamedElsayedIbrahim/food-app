@@ -30,7 +30,7 @@ class UserController extends Controller
                 $user = [
                     'name'=>Auth::user()->name,
                     'email'=>Auth::user()->email,
-                    'token'=>Auth::user()->createToken('APPFOODIGSR')->accessToken
+                    'token'=>Auth::user()->createToken('FOODAPPIGSR')->accessToken
                 ];
     
                 return $this->sendsuccess($user);

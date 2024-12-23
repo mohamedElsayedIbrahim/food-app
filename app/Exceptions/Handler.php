@@ -24,14 +24,14 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e, Request $request) {
+        $this->reportable(function (Throwable $e) {
             //
 
-            if ($request->is('api/*')) {
-                return response()->json([
-                    'message' => 'Record not found.'
-                ], 404);
-            }
+            // if ($request->is('api/*')) {
+            //     return response()->json([
+            //         'message' => 'Record not found.'
+            //     ], 404);
+            // }
         });
     }
 }
