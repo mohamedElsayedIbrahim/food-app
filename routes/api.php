@@ -31,7 +31,7 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
 
     Route::middleware(AdminAuth::class)->group(function() {
         Route::get('users',[UserController::class,'index']);
-        Route::get('users/create',[UserController::class,'store']); 
+        Route::post('users/create',[UserController::class,'store']); 
     });
 
 });
