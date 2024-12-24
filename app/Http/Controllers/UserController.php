@@ -21,6 +21,39 @@ class UserController extends Controller
         return $this->sendsuccess(UserListResource::collection($users));
     }
 
+    function store(Request $request) : object {
+        $validation = Validator::make($request->all(),[
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'email'=>'required|unique:users,email',
+            'password'=>'required',
+            'role'=>'required|in:customer,admin'
+        ]);
+
+        if ($validation->fails()) {
+            # code...
+            return $this->sendError($validation->errors(),'error');
+        }
+
+        try {
+            User::create([
+                'last_name'=>$request->last_name,
+                'first_name'=>$request->first_name,
+                'role'=>$request->role,
+                'email'=>$request->email,
+                'password'=>Hash::make($request->password)
+            ]);
+
+            return $this->sendsuccess(['message'=>'User has been created'],'success');
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->sendError(['message'=>$th->getMessage()],'error');
+        }
+        
+        return $this->sendsuccess(UserListResource::collection($users));
+    }
+
     function login(Request $request) : object {
         $validation = Validator::make($request->all(),[
             'email'=>'required|exists:users,email',
