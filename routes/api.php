@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(ApiAuthindiction::class)->group(function(){
     Route::resource('orders',OrderController::class);
     Route::post('logout',[UserController::class,'logout']);
+    Route::get('users',[UserController::class,'index']);
+
 });
 
 Route::resource('products',ProductController::class);

@@ -15,6 +15,10 @@ class UserController extends Controller
 {
     //
 
+    function index() : object {
+        
+    }
+
     function login(Request $request) : object {
         $validation = Validator::make($request->all(),[
             'email'=>'required|exists:users,email',
@@ -85,7 +89,7 @@ class UserController extends Controller
                     'customer_prefrences'=>$request->customer_prefrences
                 ]);
             }
-            
+
             return $this->sendsuccess(['message'=>'User has been registered'],'success');
 
         } catch (\Throwable $th) {
