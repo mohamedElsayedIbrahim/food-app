@@ -76,12 +76,16 @@ class UserController extends Controller
                 'password'=>Hash::make($request->password)
             ]);
             
-            Customer::create([
-                'user_id'=>$user->id,
-                'customer_address'=>$request->address,
-                'customer_phone'=>$request->phone,
-                'customer_prefrences'=>$request->customer_prefrences
-            ]);
+            if ($request->role === 'customer') {
+                # code...
+                Customer::create([
+                    'user_id'=>$user->id,
+                    'customer_address'=>$request->address,
+                    'customer_phone'=>$request->phone,
+                    'customer_prefrences'=>$request->customer_prefrences
+                ]);
+            }
+            
             return $this->sendsuccess(['message'=>'User has been registered'],'success');
 
         } catch (\Throwable $th) {
