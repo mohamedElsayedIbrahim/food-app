@@ -27,7 +27,7 @@ class UserController extends Controller
             'last_name'=>'required',
             'email'=>'required|unique:users,email',
             'password'=>'required',
-            'role'=>'required|in:customer,admin'
+            'role'=>'required|in:admin'
         ]);
 
         if ($validation->fails()) {
