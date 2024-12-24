@@ -59,6 +59,7 @@ class UserController extends Controller
             'password'=>'required',
             'address'=>'required',
             'phone'=>'required',
+            'role'=>'required|in:customer,admin'
         ]);
 
         if ($validation->fails()) {
@@ -70,7 +71,7 @@ class UserController extends Controller
             $user = User::create([
                 'last_name'=>$request->last_name,
                 'first_name'=>$request->first_name,
-                'role'=>'customer',
+                'role'=>$request->role,
                 'email'=>$request->email,
                 'password'=>Hash::make($request->password)
             ]);
