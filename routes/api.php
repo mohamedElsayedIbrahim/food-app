@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\ApiAuthindiction;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -27,7 +28,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(ApiAuthindiction::class)->group(function(){
     Route::resource('orders',OrderController::class);
     Route::post('logout',[UserController::class,'logout']);
-    Route::get('users',[UserController::class,'index']);
+
+    Route::middleware(AdminAuth::class)->group(function() {
+        Route::get('users',[UserController::class,'index']);
+        Route::get('users/create',[UserController::class,'store']); 
+    });
 
 });
 

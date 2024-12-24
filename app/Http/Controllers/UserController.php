@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\User\CustomerResource;
+use App\Http\Resources\User\UserListResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\Customer;
 use App\Models\User;
@@ -16,7 +17,8 @@ class UserController extends Controller
     //
 
     function index() : object {
-        
+        $users  = User::get();
+        return $this->sendsuccess(UserListResource::collection($users));
     }
 
     function login(Request $request) : object {
