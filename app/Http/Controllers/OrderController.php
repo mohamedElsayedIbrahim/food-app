@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -43,7 +44,7 @@ class OrderController extends Controller
             return $this->sendError($validation->errors(),'error');
         }
 
-        $user = $request->user();
+        $user = Auth::guard('api')->user();
         
         if ($user->customer === null) {
             # code...
