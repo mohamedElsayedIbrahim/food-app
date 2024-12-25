@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['recipe_name','ingredients','nutritional_info','price','category_id'];
+    protected $fillable = ['recipe_name','ingredients','nutritional_info','price','category_id','image'];
 
     function orders() : BelongsToMany {
         return $this->belongsToMany(Order::class)->withPivot('quantity')->withTimestamps();

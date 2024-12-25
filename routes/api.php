@@ -34,9 +34,13 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
         Route::post('users/create',[UserController::class,'store']); 
     });
 
+    Route::resource('admin/product',ProductController::class);
+    Route::resource('admin/category',CategoryController::class);
+
 });
 
-Route::resource('products',ProductController::class);
-Route::resource('category',CategoryController::class);
+
+Route::get('category',[CategoryController::class,'index_site']);
+Route::get('products/{product}',[ProductController::class,'show']);
 Route::post('login',[UserController::class,'login']);
 Route::post('signup',[UserController::class,'signup']);

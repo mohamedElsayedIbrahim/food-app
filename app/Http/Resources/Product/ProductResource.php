@@ -22,6 +22,7 @@ class ProductResource extends JsonResource
             'product_ingredients'=>$this->ingredients,
             'product_nutrition_info'=>$this->nutritional_info,
             'price'=>(float)$this->price,
+            'image'=>$this->image ? asset("$this->image"):null,
             'created_at'=>$this->created_at->format('d/m/Y')
         ];
     }

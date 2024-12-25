@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
+use App\Services\LocalStorage\LocalStorageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -15,7 +17,8 @@ class ProductController extends Controller
     {
         //
         $products = product::paginate(10);
-        return $this->sendsuccess(ProductResource::collection($products));
+        ProductResource::collection($products);
+        return $this->sendsuccess($products);
     }
 
     /**
@@ -32,6 +35,44 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        $valitation = Validator::make($request->all(),[
+            'recipe_name'=>'required|string',
+            'ingredients'=>'required|string',
+            'nutritional_info'=>'required|string',
+            'price'=>'required|numeric',
+            'image'=>'required|image|mimes:png,jpg,webP,jpeg',
+            'category'=>'required|exists:categories,id'
+        ]);
+
+        if ($valitation->fails()) {
+            # code...
+            return $this->sendError($valitation->errors());
+        }
+
+        $name = "";
+        if ($request->hasFile('image')) {
+            # code...
+            $storage_data = LocalStorageService::storeFile($request->file('image'),'product');
+            $name = $storage_data['path'];
+        }
+
+        try {
+            //code...
+            Product::create([
+                'recipe_name'=>$request->recipe_name,
+                'ingredients'=>$request->ingredients,
+                'nutritional_info'=>$request->nutritional_info,
+                'price'=>$request->price,
+                'category_id'=>$request->category,
+                'image'=>$name,
+            ]);
+    
+            return $this->sendsuccess(['message'=>'created successfully']);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->sendError(['messgae'=>$th->getMessage()]);
+        }
     }
 
     /**
@@ -56,7 +97,47 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
+        $id = $product->id;
         //
+        $valitation = Validator::make($request->all(),[
+            'recipe_name'=>"required|string|unique:products,recipe_name,$id",
+            'ingredients'=>'required|string',
+            'nutritional_info'=>'required|string',
+            'price'=>'required|numeric',
+            'image'=>'nullable|image|mimes:png,jpg,webP,jpeg',
+            'category'=>'required|exists:categories,id'
+        ]);
+
+        if ($valitation->fails()) {
+            # code...
+            return $this->sendError($valitation->errors());
+        }
+
+        $name = $product->image;
+
+        if ($request->hasFile('image')) {
+            # code...
+            $storage_data = LocalStorageService::updateFile($name,$request->file('image'),'product');
+            $name = $storage_data['path'];
+        }
+
+        try {
+            //code...
+            $product->update([
+                'recipe_name'=>$request->recipe_name,
+                'ingredients'=>$request->ingredients,
+                'nutritional_info'=>$request->nutritional_info,
+                'price'=>$request->price,
+                'category_id'=>$request->category,
+                'image'=>$name,
+            ]);
+    
+            return $this->sendsuccess(['message'=>'Updated successfully']);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $this->sendError(['messgae'=>$th->getMessage()]);
+        }
     }
 
     /**
@@ -65,5 +146,12 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         //
+        if ($product->image) {
+            # code...
+            LocalStorageService::deleteFile($product->image,'product');
+        }
+
+        $product->delete();
+        return $this->sendsuccess(['message'=>'Deleted Successfully']);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources\Category;
 
-use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class CategoryListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,9 @@ class CategoryResource extends JsonResource
     public function toArray(Request $request): array
     {
         // return parent::toArray($request);
-
         return [
-            // 'category_code'=>$this->id,
+            'category_code'=>$this->id,
             'category'=>$this->category_title,
-            'items'=>ProductResource::collection($this->products)
         ];
     }
 }
