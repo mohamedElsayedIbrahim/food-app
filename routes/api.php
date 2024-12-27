@@ -34,10 +34,13 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
         Route::post('users/create',[UserController::class,'store']);
         Route::put('users/{user}',[UserController::class,'update']);
         Route::delete('users/{user}',[UserController::class,'destory']);
+        
+        Route::post('admin/product/{product}/update',[ProductController::class,'update']);
+        Route::resource('admin/product',ProductController::class);
+        Route::resource('admin/category',CategoryController::class);
     });
 
-    Route::resource('admin/product',ProductController::class);
-    Route::resource('admin/category',CategoryController::class);
+    
 
 });
 
