@@ -23,8 +23,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories = Category::paginate(10);
-        CategoryListResource::collection($categories);
+        $categories = Category::get();
+        // $categories = Category::paginate(10);
+        // CategoryListResource::collection($categories);
         return $this->sendsuccess($categories);
     }
 
