@@ -31,7 +31,9 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
 
     Route::middleware(AdminAuth::class)->group(function() {
         Route::get('users',[UserController::class,'index']);
-        Route::post('users/create',[UserController::class,'store']); 
+        Route::post('users/create',[UserController::class,'store']);
+        Route::put('users/{user}',[UserController::class,'update']);
+        Route::delete('users/{user}',[UserController::class,'destory']);
     });
 
     Route::resource('admin/product',ProductController::class);
