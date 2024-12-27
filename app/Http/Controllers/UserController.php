@@ -150,7 +150,7 @@ class UserController extends Controller
             'last_name'=>'required',
             'email'=>"required|unique:users,email,$user->id",
             // 'password'=>'required',
-            'role'=>'required|in:admin'
+            // 'role'=>'required|in:admin'
         ]);
 
         if ($validation->fails()) {
@@ -162,7 +162,7 @@ class UserController extends Controller
             $user->update([
                 'last_name'=>$request->last_name,
                 'first_name'=>$request->first_name,
-                'role'=>$request->role,
+                // 'role'=>$request->role,
                 'email'=>$request->email,
                 // 'password'=>Hash::make($request->password)
             ]);
