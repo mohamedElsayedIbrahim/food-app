@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\ApiAuthindiction;
@@ -46,5 +47,6 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
 
 Route::get('category',[CategoryController::class,'index_site']);
 Route::get('products/{product}',[ProductController::class,'show']);
+Route::get('sale',[SaleController::class,'index']);
 Route::post('login',[UserController::class,'login']);
 Route::post('signup',[UserController::class,'signup']);

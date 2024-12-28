@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Sale\SaleResource;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,8 @@ class SaleController extends Controller
     public function index()
     {
         //
+        $sells = Sale::get();
+        return $this->sendsuccess(SaleResource::collection($sells));
     }
 
     /**
