@@ -63,7 +63,7 @@ class OrderController extends Controller
 
             for ($i=0; $i < count($request->products); $i++) { 
                 $recored = [$request->products[$i]=>['quantity'=>$request->quentity[$i]]];
-                $order->products()->sync($recored);
+                $order->products()->attach($recored);
             }
 
             return $this->sendsuccess(['message'=>'order is created succefully!'],'success');
