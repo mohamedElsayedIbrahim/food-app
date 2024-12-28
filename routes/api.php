@@ -33,7 +33,7 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
         Route::get('users',[UserController::class,'index']);
         Route::post('users/create',[UserController::class,'store']);
         Route::put('users/{user}',[UserController::class,'update']);
-        Route::delete('users/{user}',[UserController::class,'destory']);
+        Route::delete('users/{user}',[UserController::class,'destroy']);
         
         Route::post('admin/product/{product}/update',[ProductController::class,'update']);
         Route::resource('admin/product',ProductController::class);
