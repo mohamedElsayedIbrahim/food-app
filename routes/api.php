@@ -41,7 +41,6 @@ Route::middleware(ApiAuthindiction::class)->group(function(){
     });
 
     
-
 });
 
 
