@@ -15,7 +15,12 @@ class CategorySeedr extends Seeder
     {
         //
 
-        $category = ['Beverages', 'Snacks', 'Seasonal Specials', 'Meal Kits', 'Sugar-Free', 'Dairy-Free', 'High-Protein', 'Low-Carb', 'Paleo', 'Organic', 'Gluten-Free'];
+        $category = ["Keto Food",
+        "Vegan",
+        "Atkins",
+        "Smoothie",
+        "Healthy sweets"
+        ];
 
         foreach ($category as $value) {
             # code...
