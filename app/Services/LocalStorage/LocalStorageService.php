@@ -19,7 +19,7 @@ class LocalStorageService{
         $Contentimagename= "$object-".uniqid().".$ext";
         $filePath = "uploads/$object/".$Contentimagename;
         $path = Storage::put($filePath, file_get_contents($newFile));
-        if (Storage::exists($oldFile)) {
+        if ($oldFile != null && Storage::exists($oldFile)) {
             Storage::delete($oldFile);
         }
 
