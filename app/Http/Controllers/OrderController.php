@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Order\OrderResource;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,6 +17,8 @@ class OrderController extends Controller
     public function index()
     {
         //
+        $orders = Order::all();
+        return $this->sendsuccess(OrderResource::collection($orders));
     }
 
     /**
